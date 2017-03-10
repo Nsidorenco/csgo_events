@@ -1,5 +1,5 @@
-defmodule CsgoEventBot.Parser do
-  alias CsgoEventBot.Event
+defmodule CsgoEvents.Parser do
+  alias CsgoEvents.Event
 
   
   def process_response_body(body) do

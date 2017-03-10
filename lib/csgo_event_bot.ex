@@ -1,5 +1,5 @@
-defmodule CsgoEventBot do
-  alias CsgoEventBot.{Parser, Crawler}
+defmodule CsgoEvents do
+  alias CsgoEvents.{Parser, Crawler}
 
   def main do
     Crawler.fetch

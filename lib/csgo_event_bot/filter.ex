@@ -1,3 +1,3 @@
-defmodule CsgoEventBot.Filter do
+defmodule CsgoEvents.Filter do
 
 end

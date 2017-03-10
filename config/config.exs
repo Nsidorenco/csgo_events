@@ -10,11 +10,11 @@ use Mix.Config
 
 # You can configure for your application as:
 #
-#     config :csgo_event_bot, key: :value
+#     config :csgo_events, key: :value
 #
 # And access this configuration in your application as:
 #
-#     Application.get_env(:csgo_event_bot, :key)
+#     Application.get_env(:csgo_events, :key)
 #
 # Or configure a 3rd-party app:
 #

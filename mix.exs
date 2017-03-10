@@ -1,8 +1,8 @@
-defmodule CsgoEventBot.Mixfile do
+defmodule CsgoEvents.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :csgo_event_bot,
+    [app: :csgo_events,
      version: "0.1.0",
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,

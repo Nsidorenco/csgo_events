@@ -1,4 +1,4 @@
-defmodule CsgoEventBot.Event do
+defmodule CsgoEvents.Event do
   defstruct [:event_name,
              :event_start,
              :event_end,

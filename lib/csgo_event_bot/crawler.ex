@@ -1,4 +1,4 @@
-defmodule CsgoEventBot.Crawler do
+defmodule CsgoEvents.Crawler do
   import HTTPoison
   use GenServer
 

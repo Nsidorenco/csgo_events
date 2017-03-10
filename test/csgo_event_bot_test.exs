@@ -1,6 +1,6 @@
-defmodule CsgoEventBotTest do
+defmodule CsgoEventsTest do
   use ExUnit.Case
-  doctest CsgoEventBot
+  doctest CsgoEvents
 
   test "the truth" do
     assert 1 + 1 == 2

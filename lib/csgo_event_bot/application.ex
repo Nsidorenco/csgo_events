@@ -1,14 +1,14 @@
-defmodule CsgoEventBot.Application do
+defmodule CsgoEvents.Application do
   use Application
 
   def start(_start_type, _start_args) do
     import Supervisor.Spec, warn: false
 
     children = [
-      worker(CsgoEventBot.Crawler, [])
+      worker(CsgoEvents.Crawler, [])
     ]
 
-    opts = [strategy: :one_for_one, name: CsgoEventBot.Supervisor]
+    opts = [strategy: :one_for_one, name: CsgoEvents.Supervisor]
     Supervisor.start_link(children, opts)
   end
 

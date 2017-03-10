@@ -13,20 +13,8 @@ defmodule CsgoEvents.Crawler do
 
   #Server API
   def init(_args) do
-    Process.send_after(self(), :started, 0)
-    {:ok, []}
+    {:ok, fetch_data!()}
   end
-
-  def handle_info(:started, _) do
-    Process.send_after(self(), :update, 28800000)
-    {:noreply, fetch_data!()}
-  end
-
-  def handle_info(:update, _state) do
-    Process.send_after(self(), :update, 28800000)
-    {:noreply, System.os_time}
-  end
-
 
 
   def handle_call(:fetch, _from, state) do

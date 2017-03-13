@@ -1,9 +1,8 @@
 defmodule CsgoEvents do
-  alias CsgoEvents.{Parser, Crawler}
+  alias CsgoEvents.{Filter, Builder}
 
-  def main do
-    Crawler.fetch_data!
-    |> Parser.process_response_body
-  end
+  defdelegate filter_prize(events, mix_prize), to: Filter
+  defdelegate filter_type(events, type), to: Filter
+  defdelegate get_events, to: Builder
 
 end

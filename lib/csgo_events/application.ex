@@ -5,7 +5,7 @@ defmodule CsgoEvents.Application do
     import Supervisor.Spec, warn: false
 
     children = [
-      worker(CsgoEvents.Crawler, [])
+      worker(CsgoEvents.Builder, [])
     ]
 
     opts = [strategy: :one_for_one, name: CsgoEvents.Supervisor]

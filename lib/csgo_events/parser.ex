@@ -1,8 +1,16 @@
 defmodule CsgoEvents.Parser do
   alias CsgoEvents.Event
 
-  
-  def process_response_body(body) do
+  @moduledoc """
+    Parses the raw HTML data into a list of #{Event} structs
+  """
+
+  @doc """
+    Converts raw HTML-data of csgo events into a list of Event structs
+  """
+
+  @spec parse(String.t) :: list
+  def parse(body) do
     body
     |> Floki.find(".wrapper")
     |> build_event_list
@@ -17,7 +25,8 @@ defmodule CsgoEvents.Parser do
   defp build_event_list(body, curr, acc) do
     build_event_list(body, curr+1, [build_event_map(Enum.at(body,curr)) | acc])
   end
-
+  
+  @spec build_event_map(String.t) :: %Event{}
   defp build_event_map(body) do
     %Event{
       event_name:  find_event_name!(body),
@@ -54,6 +63,12 @@ defmodule CsgoEvents.Parser do
     body
     |> Floki.find("div")
     |> keyword_search!("Prize:",0)
+    |> String.replace(~r/[\D]/,"")
+    |> Integer.parse
+    |> case do
+        {int, _} -> int
+        _       -> nil
+      end
   end
 
   defp find_event_name!(body) do

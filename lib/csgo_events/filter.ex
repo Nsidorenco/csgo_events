@@ -25,7 +25,7 @@ defmodule CsgoEvents.Filter do
   end
 
   @spec filter_prize([%CsgoEvents.Event{}], String.t) :: list
-  def filter_type(events, "") do
+  def filter_type(events, _) do
     events
     |> Enum.filter(&(&1.event_type) !== "LAN")
   end

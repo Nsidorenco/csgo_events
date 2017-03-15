@@ -1,11 +1,10 @@
 defmodule CsgoEvents.Crawler do
   import HTTPoison
 
-  @doc """
-    Fetches raw HTML-data and parses it with Floki
-  """
+  @moduledoc false
 
-  # Remote fetching
+  
+  #Fetches raw HTML-data and parses it with Floki
   @spec fetch_data! :: String.t
   def fetch_data! do
     get!("http://www.hltv.org/events/upcoming/").body

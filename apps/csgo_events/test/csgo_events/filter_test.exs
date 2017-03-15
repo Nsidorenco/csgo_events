@@ -1,6 +1,7 @@
 defmodule CsgoEvents.FilterTest do
   alias CsgoEvents.{Filter, Event}
   use ExUnit.Case
+  doctest Filter
 
 
   def events do

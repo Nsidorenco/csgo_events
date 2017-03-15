@@ -1,14 +1,9 @@
 defmodule CsgoEvents.Parser do
   alias CsgoEvents.Event
 
-  @moduledoc """
-    Parses the raw HTML data into a list of #{Event} structs
-  """
+  @moduledoc false
 
-  @doc """
-    Converts raw HTML-data of csgo events into a list of Event structs
-  """
-
+  # Builds a list of events from the raw HTML
   @spec parse(String.t) :: list
   def parse(body) do
     body
@@ -25,7 +20,7 @@ defmodule CsgoEvents.Parser do
   defp build_event_list(body, curr, acc) do
     build_event_list(body, curr+1, [build_event_map(Enum.at(body,curr)) | acc])
   end
-  
+
   @spec build_event_map(String.t) :: %Event{}
   defp build_event_map(body) do
     %Event{

@@ -1,6 +1,6 @@
 defmodule CsgoEvents.Event do
   @moduledoc """
-    csgo event representation
+  csgo event representation
   """
 
   defstruct [:event_name,

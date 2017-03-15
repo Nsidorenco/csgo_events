@@ -3,7 +3,7 @@ defmodule CsgoEvents.Builder do
   use GenServer
 
   @moduledoc """
-    GenServer which stores the event list and updates the list every 16 hours
+  GenServer which stores the event list and updates the list every 16 hours
   """
 
   # Client API
@@ -11,6 +11,9 @@ defmodule CsgoEvents.Builder do
     GenServer.start_link(__MODULE__, :ok, name: :event_builder)
   end
 
+  @doc """
+  Returns the *list of events* stored in the GenServer
+  """
   @spec get_events :: list
   def get_events do
     GenServer.call(:event_builder, :build)
@@ -38,7 +41,7 @@ defmodule CsgoEvents.Builder do
 
   # Remote fetching
   @spec generate_event_list :: list
-  def generate_event_list do
+  defp generate_event_list do
     Crawler.fetch_data!
     |> Parser.parse
   end

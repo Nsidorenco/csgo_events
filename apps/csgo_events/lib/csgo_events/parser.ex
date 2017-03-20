@@ -4,7 +4,7 @@ defmodule CsgoEvents.Parser do
   @moduledoc false
 
   # Builds a list of events from the raw HTML
-  @spec parse(String.t) :: list
+  @spec parse(String.t) :: [CsgoEvents.Event.t]
   def parse(body) do
     body
     |> Floki.find(".wrapper")
@@ -21,7 +21,7 @@ defmodule CsgoEvents.Parser do
     build_event_list(body, curr+1, [build_event_map(Enum.at(body,curr)) | acc])
   end
 
-  @spec build_event_map(String.t) :: CsgoEvents.Event.t
+  # calls all helper functions and creates a Event struct
   defp build_event_map(body) do
     %Event{
       event_name:  find_event_name!(body),
@@ -32,6 +32,7 @@ defmodule CsgoEvents.Parser do
     }
   end
 
+  # recursively climbs though the html until it finds the result for the given keyword
   defp keyword_search!(body, _keyword, curr) when curr >= length(body), do: "no data"
   defp keyword_search!(body, keyword, curr) do
     string = Floki.text(Enum.at(body,curr))
@@ -42,6 +43,7 @@ defmodule CsgoEvents.Parser do
     end
   end
 
+  # Find the starting date of the event
   defp find_event_start!(body) do
     body
     |> Floki.find("div")
@@ -49,6 +51,7 @@ defmodule CsgoEvents.Parser do
     |> parse_date
   end
 
+  # Find the end date of the event
   defp find_event_end!(body) do
     body
     |> Floki.find("div")
@@ -56,6 +59,7 @@ defmodule CsgoEvents.Parser do
     |> parse_date
   end
 
+  # Finds the prize pool and converts it to a integer
   defp find_event_prize!(body) do
     body
     |> Floki.find("div")
@@ -68,31 +72,37 @@ defmodule CsgoEvents.Parser do
       end
   end
 
+  # Finds and returns the name of the event
   defp find_event_name!(body) do
     body
     |> Floki.find(".eventheadline")
     |> Floki.text
   end
 
+  # Finds and returns the type of event
   defp find_event_type!(body) do
     body
     |> Floki.find(".ribbon-wrapper")
     |> Floki.text
   end
 
+  # Parses string representation of a Data into a Date struct
   defp parse_date(string) do
     list = String.split(string)
     parsedList = Enum.map(list, &parse_date_string/1)
 
+    # Only try to create a date if the string representation exists
     with [day, _, month, year | _ ] <- parsedList
     do
       {:ok, date} = Date.new(year, parse_month(month), day)
+      # no need to return the tuple
       date
     else
       _ -> :no_date
     end
   end
 
+  # Converts string representation of integer to an integer
   defp parse_date_string(string) do
     case Integer.parse(string) do
       {integer, _} -> integer
@@ -100,6 +110,7 @@ defmodule CsgoEvents.Parser do
     end
   end
 
+  # Converts the string representation of a month to an integer
   defp parse_month(string) do
     case string do
       "January"   -> 1

@@ -1,4 +1,5 @@
 defmodule CsgoEvents.Filter do
+  alias CsgoEvents.Event
 
   @moduledoc """
   Provides functions for filtering events from the event list
@@ -20,7 +21,7 @@ defmodule CsgoEvents.Filter do
     `[%Event{event_prize: 20}]`
 
   """
-  @spec filter_prize([CsgoEvents.Event.t, ...], number) :: [CsgoEvents.Event.t]
+  @spec filter_prize([Event.t, ...], number) :: [Event.t]
   def filter_prize(events, min_prize) do
     events
     |> Enum.filter(&(&1.event_prize) >= min_prize)
@@ -37,7 +38,7 @@ defmodule CsgoEvents.Filter do
     - type: String that is either "LAN" or something else
   """
 
-  @spec filter_type([CsgoEvents.Event.t, ...], String.t) :: [CsgoEvents.Event.t]
+  @spec filter_type([Event.t, ...], String.t) :: [Event.t]
   def filter_type(events, "LAN") do
     events
     |> Enum.filter(&(&1.event_type) === "LAN")

@@ -77,6 +77,7 @@ defmodule CsgoEvents.Parser do
     body
     |> Floki.find(".eventheadline")
     |> Floki.text
+    |> to_string
   end
 
   # Finds and returns the type of event
